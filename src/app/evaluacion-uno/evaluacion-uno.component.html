@@ -33,10 +33,10 @@
     <div class="shadow-lg p-3 mb-5 bg-white rounded">
         <h2>Carrito del usuario {{correo}}</h2>
         <div class="list-group">
-            <a *ngFor="let producto of carrito" class="list-group-item clearfix">
+            <a *ngFor="let producto of carrito, index as i" class="list-group-item clearfix">
                 {{producto.nombre}} - <small class="text-muted">Precio: ${{producto.precio}}</small>
                 <span class="float-right">
-                    <a href="#" (click)="eliminarDelCarrito(producto.id)" class="btn btn-primary">Eliminar del carrito</a>
+                    <a href="#" (click)="eliminarDelCarrito(i)" class="btn btn-primary">Eliminar del carrito</a>
                 </span>
             </a>
         </div>

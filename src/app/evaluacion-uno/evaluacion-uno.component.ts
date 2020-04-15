@@ -26,7 +26,12 @@ export class EvaluacionUnoComponent implements OnInit {
   }
 
   eliminarDelCarrito(idProducto) {
-    this.carrito = this.carrito.filter(obj => obj.id !== idProducto);
+    let eliminado = this.carrito[idProducto];
+    this.carrito.splice(idProducto,1);
+    let resto = this.carrito.filter(obj => obj.id === eliminado.id);
+    if(resto.length == 0) {
+      this.productos[eliminado.id].seleccionado = false;
+    }
   }
 
   agregarProducto(idProducto) {
