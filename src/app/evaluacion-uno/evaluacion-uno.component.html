@@ -1,0 +1,44 @@
+<div class="container-md">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <h1>ANGULAR : EVALUACI&Oacute;N 1</h1>
+        <small class="form-text text-muted">BY Javier Reyes</small>
+    </div>
+</div>
+<div *ngIf="!entradaValida" class="container-md">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <form #correoForm="ngForm">
+            <div class="form-group">
+              <label for="correo">INGRESE UN CORREO ELECTR&Oacute;NICO V&Aacute;LIDO:</label>
+              <input type="email" class="form-control" placeholder="Ingresar correo..." [(ngModel)]="correo" name="correo" required email>
+            </div>
+            <button [disabled]="!correoForm.valid" type="submit" class="btn btn-primary" (click)="entrar()">ENTRAR</button>
+            <p>{{correoForm.valid?'':'CORREO INV&Aacute;LIDO'}}</p>
+        </form>
+    </div>
+</div>
+<div *ngIf="entradaValida" class="container-md">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <h2>Lista de productos</h2>
+        <div *ngFor="let producto of productos, index as i" [ngClass]="{'card w-100':true, 'bg-info':producto.seleccionado}">
+            <div class="card-body">
+              <h5 class="card-title">{{producto.nombre}}</h5>
+              <p class="card-text">{{producto.descripcion}}</p>
+              <p class="card-text"><small class="text-muted">Precio: ${{producto.precio}}</small></p>
+              <a href="#" (click)="agregarProducto(i)" class="btn btn-primary">Agregar al carrito</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="entradaValida" class="container-md">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <h2>Carrito del usuario {{correo}}</h2>
+        <div class="list-group">
+            <a *ngFor="let producto of carrito" class="list-group-item clearfix">
+                {{producto.nombre}} - <small class="text-muted">Precio: ${{producto.precio}}</small>
+                <span class="float-right">
+                    <a href="#" (click)="eliminarDelCarrito(producto.id)" class="btn btn-primary">Eliminar del carrito</a>
+                </span>
+            </a>
+        </div>
+    </div>
+</div>
